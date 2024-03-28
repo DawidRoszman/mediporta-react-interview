@@ -1,7 +1,7 @@
-import { Box, IconButton, Typography } from "@mui/material"
+import { Box, Pagination } from "@mui/material"
 import { useDispatchTags, useTags } from "./TagsContext";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { Type } from "../utils/tagsReducer";
+import { ChangeEvent } from "react";
 
 const PageSelection = () => {
   const tags = useTags();
@@ -9,7 +9,7 @@ const PageSelection = () => {
 
   if (tagsDispatch === null || tags === null) return null;
 
-  const onPageChange = (value: number) => {
+  const onPageChange = (e: ChangeEvent<unknown>, value: number) => {
     tagsDispatch({
       type: Type.SET_PAGE,
       payload: {
@@ -25,14 +25,7 @@ const PageSelection = () => {
       padding="1rem"
       alignItems="center"
     >
-      <IconButton onClick={() => onPageChange(tags.page - 1)} disabled={tags.page === 1}>
-        <ArrowBackIos />
-      </IconButton>
-      <Typography>{tags.page}</Typography>
-      {/* The maximum page number that will be returned for anonymous API access (no access token or app key) is 25 - https://api.stackexchange.com/docs */}
-      <IconButton onClick={() => onPageChange(tags.page + 1)} disabled={tags.page >= 25}>
-        <ArrowForwardIos />
-      </IconButton>
+      <Pagination count={25} page={tags.page} onChange={onPageChange} showFirstButton showLastButton />
     </Box>
   )
 }
