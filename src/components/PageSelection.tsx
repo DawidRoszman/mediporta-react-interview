@@ -29,7 +29,8 @@ const PageSelection = () => {
         <ArrowBackIos />
       </IconButton>
       <Typography>{tags.page}</Typography>
-      <IconButton onClick={() => onPageChange(tags.page + 1)}>
+      {/* The maximum page number that will be returned for anonymous API access (no access token or app key) is 25 - https://api.stackexchange.com/docs */}
+      <IconButton onClick={() => onPageChange(tags.page + 1)} disabled={tags.page >= 25}>
         <ArrowForwardIos />
       </IconButton>
     </Box>

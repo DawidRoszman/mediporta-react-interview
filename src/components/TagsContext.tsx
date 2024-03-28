@@ -14,8 +14,11 @@ export function useDispatchTags() {
 }
 
 const initialTagsSettings: TagsSettings = {
-  page: 1,
-  rowsPerPage: 5
+  page: 10,
+  rowsPerPage: 5,
+  has_more: true,
+  order: "desc",
+  orderBy: "popular"
 }
 
 export function TagsProvider({ children }: { children: React.ReactNode }) {

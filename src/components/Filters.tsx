@@ -10,8 +10,7 @@ const Filters = () => {
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = parseInt(e.target.value)
-    // The maximum page number that will be returned for anonymous API access (no access token or app key) is 25 - https://api.stackexchange.com/docs
-    if (value > 0 && value < 25) {
+    if (value > 0 && value <= 100) {
       setNumOfItems(value)
     }
   }
