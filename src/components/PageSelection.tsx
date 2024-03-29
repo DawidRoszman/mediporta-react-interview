@@ -19,7 +19,7 @@ const PageSelection = ({ pageCount }: PageSelectionProps) => {
     </Box>
   );
 
-  const onPageChange = (e: ChangeEvent<unknown>, value: number) => {
+  const onPageChange = (_: ChangeEvent<unknown>, value: number) => {
     tagsDispatch({
       type: Type.SET_PAGE,
       payload: {
