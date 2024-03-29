@@ -23,7 +23,7 @@ export default {
     },
     orderBy: {
       control: {
-        type: 'text',
+        type: 'select',
         options: ['name', 'popular']
       }
     }
