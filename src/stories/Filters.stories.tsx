@@ -1,3 +1,4 @@
+import React from "react";
 import Filters from "../components/Filters";
 import { TagsProvider } from "../components/TagsContext";
 
@@ -9,7 +10,7 @@ export default {
 
 export const Default = {
   decorators: [
-    (Story: any) => (
+    (Story: React.FC) => (
       <TagsProvider>
         <Story />
       </TagsProvider>

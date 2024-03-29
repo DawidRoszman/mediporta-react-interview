@@ -1,3 +1,4 @@
+import React from "react";
 import PageSelection from "../components/PageSelection";
 import { TagsProvider } from "../components/TagsContext";
 
@@ -17,7 +18,7 @@ export default {
 
 export const Default = {
   decorators: [
-    (Story: any) => (
+    (Story: React.FC) => (
       <TagsProvider>
 
         <Story />

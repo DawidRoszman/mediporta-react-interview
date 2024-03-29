@@ -1,7 +1,7 @@
 import { Box, Pagination, Skeleton } from "@mui/material"
-import { useDispatchTags, useTags } from "./TagsContext";
 import { Type } from "../utils/tagsReducer";
 import { ChangeEvent } from "react";
+import { useDispatchTags, useTags } from "../utils/useTags";
 
 interface PageSelectionProps {
   pageCount: number;

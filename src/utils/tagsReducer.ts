@@ -1,7 +1,29 @@
-export interface Action{
-  payload: TagsSettings;
-  type: Type;
+interface SetPageAction {
+  type: Type.SET_PAGE;
+  payload: { page: number };
 }
+
+interface SetRowsPerPageAction {
+  type: Type.SET_ROWS_PER_PAGE;
+  payload: { rowsPerPage: number };
+}
+
+interface SetHasMoreAction {
+  type: Type.SET_HAS_MORE;
+  payload: { has_more: boolean };
+}
+
+interface SetOrderAction {
+  type: Type.SET_ORDER;
+  payload: { order: "asc" | "desc" };
+}
+
+interface SetOrderByAction {
+  type: Type.SET_ORDER_BY;
+  payload: { orderBy: "name" | "popular" };
+}
+
+export type Action = SetPageAction | SetRowsPerPageAction | SetHasMoreAction | SetOrderAction | SetOrderByAction;
 
 export enum Type {
   SET_PAGE,

@@ -1,19 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
 import { fetchTags } from '../utils/queries';
 import { Type } from '../utils/tagsReducer';
-import { useDispatchTags, useTags } from './TagsContext';
 import TableLoadingSkeleton from './TableLoadingSkeleton';
 import ErrorState from './ErrorState';
 import TagsTable from './TagsTable';
+import { useDispatchTags, useTags } from '../utils/useTags';
 
 const TagsData = () => {
   const tagsSettings = useTags();
   const tagsDispatch = useDispatchTags();
-  if (tagsSettings === null || tagsDispatch === null) return <TableLoadingSkeleton rowsPerPage={5} />;
-  const { page, rowsPerPage, order, orderBy } = tagsSettings;
-
 
   const fetchTagsHelper = async () => {
+    if (tagsSettings === null || tagsDispatch === null) return;
     const data = await fetchTags(page, rowsPerPage, order, orderBy);
     if (data.has_more) {
       tagsDispatch(
@@ -29,9 +27,12 @@ const TagsData = () => {
   };
 
   const query = useQuery({
-    queryKey: ["tags", page, rowsPerPage, order, orderBy],
+    queryKey: ["tags"],
     queryFn: fetchTagsHelper,
   });
+  if (tagsSettings === null || tagsDispatch === null) return <TableLoadingSkeleton rowsPerPage={5} />;
+  const { page, rowsPerPage, order, orderBy } = tagsSettings;
+
 
 
   if (query.isPending)
@@ -43,7 +44,10 @@ const TagsData = () => {
       <ErrorState errorMessage={query.error.message} />
     );
 
-  const rows = query.data.items.map((item: any) => {
+  const rows = query.data.items.map((item: {
+    name: string;
+    count: number;
+  }) => {
     return {
       name: item.name,
       count: item.count,

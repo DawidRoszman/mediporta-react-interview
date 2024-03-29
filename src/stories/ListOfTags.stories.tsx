@@ -3,6 +3,7 @@ import TagsTable from '../components/TagsTable';
 import { TagsProvider } from '../components/TagsContext';
 import TableLoadingSkeleton from '../components/TableLoadingSkeleton';
 import ErrorState from '../components/ErrorState';
+import React from 'react';
 
 export default {
   component: TagsTable,
@@ -33,7 +34,7 @@ const queryClient = new QueryClient();
 
 export const Default = {
   decorators: [
-    (Story: any) => (
+    (Story: React.FC) => (
       <QueryClientProvider client={queryClient}>
         <TagsProvider>
           <Story />

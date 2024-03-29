@@ -1,7 +1,7 @@
 import { Box, Button, Skeleton, TextField } from "@mui/material"
 import { useState } from "react"
-import { useDispatchTags } from "./TagsContext"
 import { Type } from "../utils/tagsReducer"
+import { useDispatchTags } from "../utils/useTags"
 
 const Filters = () => {
   const [numOfItems, setNumOfItems] = useState(5)

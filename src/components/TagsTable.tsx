@@ -6,7 +6,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, TableSortLabel } from "@mui/material";
 import { visuallyHidden } from '@mui/utils';
-import { Type } from "../utils/tagsReducer";
+import { Action, Type } from "../utils/tagsReducer";
 import React from "react";
 
 interface Row {
@@ -16,14 +16,14 @@ interface Row {
 
 interface TagsTableProps {
   data: Row[];
-  tagsDispatch: React.Dispatch<any>;
+  tagsDispatch: React.Dispatch<Action>;
   order: "asc" | "desc";
-  orderBy: string;
+  orderBy: "name" | "popular";
 }
 
 function TagsTable({ data, tagsDispatch, order, orderBy }: TagsTableProps) {
 
-  function handleRequestSort(name: string) {
+  function handleRequestSort(name: "name" | "popular") {
     if (tagsDispatch === null) return;
     tagsDispatch(
       {
@@ -55,7 +55,7 @@ function TagsTable({ data, tagsDispatch, order, orderBy }: TagsTableProps) {
                 onClick={() => handleRequestSort('name')}
               >
                 Tags
-                {true ? (
+                {orderBy === 'name' ? (
                   <Box component="span" sx={visuallyHidden}>
                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                   </Box>
@@ -69,7 +69,7 @@ function TagsTable({ data, tagsDispatch, order, orderBy }: TagsTableProps) {
                 onClick={() => handleRequestSort('popular')}
               >
                 Count
-                {true ? (
+                {orderBy === 'popular' ? (
                   <Box component="span" sx={visuallyHidden}>
                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                   </Box>
