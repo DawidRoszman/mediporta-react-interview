@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import Filters from "./components/Filters"
-import ListOfTags from "./components/ListOfTags"
 import PageSelection from "./components/PageSelection"
 import { TagsProvider } from "./components/TagsContext";
+import TagsData from "./components/TagsData";
 
 function App() {
 
@@ -12,8 +12,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TagsProvider>
         <Filters />
-        <ListOfTags />
-        <PageSelection />
+        <TagsData />
+        <PageSelection pageCount={25} />
       </TagsProvider>
     </QueryClientProvider>
   )

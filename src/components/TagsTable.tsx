@@ -4,66 +4,28 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useDispatchTags, useTags } from "./TagsContext";
-import { useQuery } from "@tanstack/react-query";
-import { fetchTags } from "../utils/queries";
-import { Alert, Box, Skeleton, TableSortLabel } from "@mui/material";
+import { Box, TableSortLabel } from "@mui/material";
 import { visuallyHidden } from '@mui/utils';
 import { Type } from "../utils/tagsReducer";
+import React from "react";
 
 interface Row {
   name: string;
   count: number;
 }
 
-function ListOfTags() {
-  const tagsSettings = useTags();
-  const dispatchTags = useDispatchTags();
-  if (tagsSettings === null || dispatchTags === null) return null;
-  const { page, rowsPerPage, order, orderBy } = tagsSettings;
+interface TagsTableProps {
+  data: Row[];
+  tagsDispatch: React.Dispatch<any>;
+  order: "asc" | "desc";
+  orderBy: string;
+}
 
-  const fetchTagsHelper = async () => {
-    const data = await fetchTags(page, rowsPerPage, order, orderBy);
-    if (data.has_more) {
-      dispatchTags(
-        {
-          type: Type.SET_HAS_MORE,
-          payload: {
-            has_more: data.has_more,
-          },
-        }
-      )
-    }
-    return data;
-  };
-
-  const query = useQuery({
-    queryKey: ["tags", page, rowsPerPage, order, orderBy],
-    queryFn: fetchTagsHelper,
-  });
-
-  if (query.isPending)
-    return (
-      TableLoadingSkeleton(rowsPerPage)
-    );
-  if (query.isError)
-    return (
-      <Alert severity="error">
-        Error: {query.error.message}. Please try again later!
-      </Alert>
-    );
-
-  const rows = query.data.items.map((item: any) => {
-    return {
-      name: item.name,
-      count: item.count,
-    };
-  });
-
+function TagsTable({ data, tagsDispatch, order, orderBy }: TagsTableProps) {
 
   function handleRequestSort(name: string) {
-    if (tagsSettings === null || dispatchTags === null) return;
-    dispatchTags(
+    if (tagsDispatch === null) return;
+    tagsDispatch(
       {
         type: Type.SET_ORDER_BY,
         payload: {
@@ -71,7 +33,7 @@ function ListOfTags() {
         },
       }
     )
-    dispatchTags(
+    tagsDispatch(
       {
         type: Type.SET_ORDER,
         payload: {
@@ -116,7 +78,7 @@ function ListOfTags() {
 
             </TableCell>
           </TableRow>
-          {rows.map((row: Row) => (
+          {data.map((row: Row) => (
             <TableRow key={row.name}>
               <TableCell component="th" scope="row">
                 {row.name}
@@ -131,29 +93,6 @@ function ListOfTags() {
   );
 }
 
-export default ListOfTags;
+export default TagsTable;
 
-function TableLoadingSkeleton(rowsPerPage: number) {
-  return <TableContainer component={Paper}>
-    <Table sx={{ minWidth: 500 }} aria-label="loading for table">
-      <TableBody>
-        <TableRow>
-          <TableCell>Tag</TableCell>
-          <TableCell>Count</TableCell>
-        </TableRow>
-        {Array(rowsPerPage).fill(0).map((_, id) => (
-          <TableRow key={id}>
-            <TableCell component="th" scope="row">
-              <Skeleton width="5rem" />
-            </TableCell>
-            <TableCell style={{ width: 160 }}>
-              <Skeleton />
-            </TableCell>
-          </TableRow>
-        )
-        )}
-      </TableBody>
-    </Table>
-  </TableContainer>;
-}
 

@@ -1,13 +1,23 @@
-import { Box, Pagination } from "@mui/material"
+import { Box, Pagination, Skeleton } from "@mui/material"
 import { useDispatchTags, useTags } from "./TagsContext";
 import { Type } from "../utils/tagsReducer";
 import { ChangeEvent } from "react";
 
-const PageSelection = () => {
+interface PageSelectionProps {
+  pageCount: number;
+}
+
+const PageSelection = ({ pageCount }: PageSelectionProps) => {
   const tags = useTags();
   const tagsDispatch = useDispatchTags();
 
-  if (tagsDispatch === null || tags === null) return null;
+  if (tagsDispatch === null || tags === null) return (
+    <Box
+      justifyContent="center"
+      display="flex">
+      <Skeleton width="20rem" height={"5rem"} />
+    </Box>
+  );
 
   const onPageChange = (e: ChangeEvent<unknown>, value: number) => {
     tagsDispatch({
@@ -25,7 +35,7 @@ const PageSelection = () => {
       padding="1rem"
       alignItems="center"
     >
-      <Pagination count={25} page={tags.page} onChange={onPageChange} showFirstButton showLastButton />
+      <Pagination count={pageCount} page={tags.page} onChange={onPageChange} showFirstButton showLastButton />
     </Box>
   )
 }

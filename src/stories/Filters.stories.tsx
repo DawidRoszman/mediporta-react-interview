@@ -4,6 +4,7 @@ import { TagsProvider } from "../components/TagsContext";
 export default {
   component: Filters,
   title: 'Filters',
+  tags: ['autodocs'],
 }
 
 export const Default = {
@@ -15,3 +16,5 @@ export const Default = {
     ),
   ],
 };
+
+export const Loading = () => <Filters />;
