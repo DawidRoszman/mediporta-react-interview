@@ -27,7 +27,7 @@ const TagsData = () => {
   };
 
   const query = useQuery({
-    queryKey: ["tags"],
+    queryKey: ["tags", tagsSettings],
     queryFn: fetchTagsHelper,
   });
   if (tagsSettings === null || tagsDispatch === null) return <TableLoadingSkeleton rowsPerPage={5} />;

@@ -7,7 +7,7 @@ export const DispatchTagsContext = createContext<React.Dispatch<Action> | null>(
 
 
 const initialTagsSettings: TagsSettings = {
-  page: 10,
+  page: 1,
   rowsPerPage: 5,
   has_more: true,
   order: "desc",
