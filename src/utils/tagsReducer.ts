@@ -23,7 +23,12 @@ interface SetOrderByAction {
   payload: { orderBy: "name" | "popular" };
 }
 
-export type Action = SetPageAction | SetRowsPerPageAction | SetHasMoreAction | SetOrderAction | SetOrderByAction;
+export type Action =
+  | SetPageAction
+  | SetRowsPerPageAction
+  | SetHasMoreAction
+  | SetOrderAction
+  | SetOrderByAction;
 
 export enum Type {
   SET_PAGE,
@@ -46,29 +51,30 @@ export const tagsReducer = (state: TagsSettings, action: Action) => {
     case Type.SET_PAGE:
       return {
         ...state,
-        page: action.payload.page
-      }
+        page: action.payload.page,
+      };
     case Type.SET_ROWS_PER_PAGE:
       return {
         ...state,
-        rowsPerPage: action.payload.rowsPerPage
-      }
+        rowsPerPage: action.payload.rowsPerPage,
+      };
     case Type.SET_HAS_MORE:
       return {
         ...state,
-        has_more: action.payload.has_more
-      }
+        has_more: action.payload.has_more,
+      };
     case Type.SET_ORDER:
       return {
         ...state,
-        order: action.payload.order
-      }
+        order: action.payload.order,
+      };
     case Type.SET_ORDER_BY:
       return {
         ...state,
-        orderBy: action.payload.orderBy
-      }
+        orderBy: action.payload.orderBy,
+      };
     default:
       return state;
   }
-}
+};
+

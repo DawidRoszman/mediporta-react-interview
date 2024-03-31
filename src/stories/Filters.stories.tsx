@@ -4,9 +4,9 @@ import { TagsProvider } from "../components/TagsContext";
 
 export default {
   component: Filters,
-  title: 'Filters',
-  tags: ['autodocs'],
-}
+  title: "Filters",
+  tags: ["autodocs"],
+};
 
 export const Default = {
   decorators: [
@@ -19,3 +19,4 @@ export const Default = {
 };
 
 export const Loading = () => <Filters />;
+

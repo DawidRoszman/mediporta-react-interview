@@ -4,32 +4,31 @@ import { TagsProvider } from "../components/TagsContext";
 
 export default {
   component: PageSelection,
-  title: 'Page Selection',
-  tags: ['autodocs'],
+  title: "Page Selection",
+  tags: ["autodocs"],
   argTypes: {
     pageCount: {
       control: {
-        type: 'number'
-      }
-    }
-
-  }
-}
+        type: "number",
+      },
+    },
+  },
+};
 
 export const Default = {
   decorators: [
     (Story: React.FC) => (
       <TagsProvider>
-
         <Story />
       </TagsProvider>
     ),
   ],
   args: {
-    pageCount: 25
-  }
+    pageCount: 25,
+  },
 };
 
 export const Loading = () => {
-  return <PageSelection pageCount={25} />
-}
+  return <PageSelection pageCount={25} />;
+};
+

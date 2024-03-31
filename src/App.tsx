@@ -1,11 +1,10 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import Filters from "./components/Filters"
-import PageSelection from "./components/PageSelection"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Filters from "./components/Filters";
+import PageSelection from "./components/PageSelection";
 import { TagsProvider } from "./components/TagsContext";
 import TagsData from "./components/TagsData";
 
 function App() {
-
   const queryClient = new QueryClient();
 
   return (
@@ -16,7 +15,7 @@ function App() {
         <PageSelection pageCount={25} />
       </TagsProvider>
     </QueryClientProvider>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -3,16 +3,17 @@ import { Action, TagsSettings, tagsReducer } from "../utils/tagsReducer";
 
 export const TagsContext = createContext<TagsSettings | null>(null);
 
-export const DispatchTagsContext = createContext<React.Dispatch<Action> | null>(null);
-
+export const DispatchTagsContext = createContext<React.Dispatch<Action> | null>(
+  null,
+);
 
 const initialTagsSettings: TagsSettings = {
   page: 1,
   rowsPerPage: 5,
   has_more: true,
   order: "desc",
-  orderBy: "popular"
-}
+  orderBy: "popular",
+};
 
 export function TagsProvider({ children }: { children: React.ReactNode }) {
   const [tags, dispatch] = useReducer(tagsReducer, initialTagsSettings);
@@ -22,5 +23,6 @@ export function TagsProvider({ children }: { children: React.ReactNode }) {
         {children}
       </DispatchTagsContext.Provider>
     </TagsContext.Provider>
-  )
+  );
 }
+

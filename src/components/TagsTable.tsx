@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, TableSortLabel } from "@mui/material";
-import { visuallyHidden } from '@mui/utils';
+import { visuallyHidden } from "@mui/utils";
 import { Action, Type } from "../utils/tagsReducer";
 import React from "react";
 
@@ -22,25 +22,20 @@ interface TagsTableProps {
 }
 
 function TagsTable({ data, tagsDispatch, order, orderBy }: TagsTableProps) {
-
   function handleRequestSort(name: "name" | "popular") {
     if (tagsDispatch === null) return;
-    tagsDispatch(
-      {
-        type: Type.SET_ORDER_BY,
-        payload: {
-          orderBy: name,
-        },
-      }
-    )
-    tagsDispatch(
-      {
-        type: Type.SET_ORDER,
-        payload: {
-          order: order === "asc" ? "desc" : "asc",
-        },
-      }
-    )
+    tagsDispatch({
+      type: Type.SET_ORDER_BY,
+      payload: {
+        orderBy: name,
+      },
+    });
+    tagsDispatch({
+      type: Type.SET_ORDER,
+      payload: {
+        order: order === "asc" ? "desc" : "asc",
+      },
+    });
   }
 
   return (
@@ -50,32 +45,35 @@ function TagsTable({ data, tagsDispatch, order, orderBy }: TagsTableProps) {
           <TableRow>
             <TableCell>
               <TableSortLabel
-                active={orderBy === 'name'}
-                direction={order === 'asc' ? 'asc' : 'desc'}
-                onClick={() => handleRequestSort('name')}
+                active={orderBy === "name"}
+                direction={order === "asc" ? "asc" : "desc"}
+                onClick={() => handleRequestSort("name")}
               >
                 Tags
-                {orderBy === 'name' ? (
+                {orderBy === "name" ? (
                   <Box component="span" sx={visuallyHidden}>
-                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
                   </Box>
                 ) : null}
               </TableSortLabel>
             </TableCell>
             <TableCell>
               <TableSortLabel
-                active={orderBy === 'popular'}
-                direction={order === 'asc' ? 'asc' : 'desc'}
-                onClick={() => handleRequestSort('popular')}
+                active={orderBy === "popular"}
+                direction={order === "asc" ? "asc" : "desc"}
+                onClick={() => handleRequestSort("popular")}
               >
                 Count
-                {orderBy === 'popular' ? (
+                {orderBy === "popular" ? (
                   <Box component="span" sx={visuallyHidden}>
-                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
                   </Box>
                 ) : null}
               </TableSortLabel>
-
             </TableCell>
           </TableRow>
           {data.map((row: Row) => (
@@ -85,8 +83,7 @@ function TagsTable({ data, tagsDispatch, order, orderBy }: TagsTableProps) {
               </TableCell>
               <TableCell style={{ width: 160 }}>{row.count}</TableCell>
             </TableRow>
-          )
-          )}
+          ))}
         </TableBody>
       </Table>
     </TableContainer>
@@ -94,5 +91,3 @@ function TagsTable({ data, tagsDispatch, order, orderBy }: TagsTableProps) {
 }
 
 export default TagsTable;
-
-

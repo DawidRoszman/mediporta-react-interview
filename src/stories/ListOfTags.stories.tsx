@@ -1,35 +1,34 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import TagsTable from '../components/TagsTable';
-import { TagsProvider } from '../components/TagsContext';
-import TableLoadingSkeleton from '../components/TableLoadingSkeleton';
-import ErrorState from '../components/ErrorState';
-import React from 'react';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import TagsTable from "../components/TagsTable";
+import { TagsProvider } from "../components/TagsContext";
+import TableLoadingSkeleton from "../components/TableLoadingSkeleton";
+import ErrorState from "../components/ErrorState";
+import React from "react";
 
 export default {
   component: TagsTable,
-  title: 'Tags Table',
-  tags: ['autodocs'],
+  title: "Tags Table",
+  tags: ["autodocs"],
   argTypes: {
     data: {
       control: {
-        type: 'object'
-      }
+        type: "object",
+      },
     },
     order: {
       control: {
-        type: 'select',
-        options: ['asc', 'desc']
-      }
+        type: "select",
+        options: ["asc", "desc"],
+      },
     },
     orderBy: {
       control: {
-        type: 'select',
-        options: ['name', 'popular']
-      }
-    }
+        type: "select",
+        options: ["name", "popular"],
+      },
+    },
   },
-
-}
+};
 const queryClient = new QueryClient();
 
 export const Default = {
@@ -45,17 +44,17 @@ export const Default = {
   args: {
     data: [
       {
-        name: 'tag1',
+        name: "tag1",
         count: 1,
       },
       {
-        name: 'tag2',
+        name: "tag2",
         count: 2,
       },
     ],
     order: "desc",
-    orderBy: "popular"
-  }
+    orderBy: "popular",
+  },
 };
 
 export const Loading = () => <TableLoadingSkeleton rowsPerPage={5} />;
